@@ -1,0 +1,39 @@
+   System.setProperty("webdriver.chrome.driver", "H:\\chromedriver.exe");
+     WebDriver driver = new ChromeDriver();
+     driver.get("");
+     String scriptToExecute =
+     "var performance = window.performance || window.mozPerformance || window.msPerformance||window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;";
+     String netData = ((JavascriptExecutor) driver).executeScript(scriptToExecute).toString();
+     String abc = netData.substring(netData.indexOf("access_token"),
+     netData.indexOf("&token_type")).split("=")[1];
+     System.out.println(abc);
+     System.out.println("GAURAV____>>" + netData);
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+    DesiredCapabilities d = DesiredCapabilities.chrome();
+    LoggingPreferences logPrefs = new LoggingPreferences();
+    logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
+    d.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+    WebDriver driver = new ChromeDriver(d);
+    driver.get("https://mel-qa.go-dev.csx.com/");
+    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+    LogEntries les = driver.manage().logs().get(LogType.PERFORMANCE);
+    for (LogEntry le : les) {
+      System.out.println(le.getMessage());
+    }
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+     System.setProperty("webdriver.chrome.driver", "H:\\chromedriver.exe");
+     ChromeOptions obj_CO = new ChromeOptions();
+     obj_CO.addArguments("headless");
+     WebDriver driver = new ChromeDriver(obj_CO);
+     driver.get("h");
+     String scriptToExecute =
+     "var performance = window.performance || window.mozPerformance || window.msPerformance ||
+     window.webkitPerformance || {}; var network = performance.getEntries() || {};
+     retur nnetwork;";
+     String netData = ((JavascriptExecutor) driver).executeScript(scriptToExecute).toString();
+     String abc = netData.substring(netData.indexOf("access_token"),
+     netData.indexOf("&token_type")).split("=")[1];
+     System.out.println(abc);
+     System.out.println("GAURAV____>>" + netData);
